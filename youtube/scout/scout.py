@@ -101,7 +101,3 @@ class Scout:
       if self.key_word in title.get_attribute('title').lower():
         self.videos.add(title.get_attribute('href'))
     return self.videos
-
-
-scout = Scout()
-print(len(scout.findVideos()))
