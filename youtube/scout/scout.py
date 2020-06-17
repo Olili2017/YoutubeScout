@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from youtube.scout.type import ScoutType
+from youtube.video.video import ScrapedVideo
 import time
 
 class Scout:
@@ -95,9 +96,19 @@ class Scout:
     # print(str(results.innerHTML))
     for result in results:
       title = result.find_element_by_xpath('.//a[@id="video-title"]')
+      thumbnail = result.find_element_by_xpath('.//*[@id="img"]')
+      video = ScrapedVideo(title.get_attribute('title'), title.get_attribute('href'), thumbnail.get_attribute('src'))
+
       if self.get_all_videos:
-        self.videos.add(title.get_attribute('href'))
+        self.videos.add(video)
+        # self.videos.add((title.get_attribute('title'), title.get_attribute('href')))
         continue
       if self.key_word in title.get_attribute('title').lower():
-        self.videos.add(title.get_attribute('href'))
+        self.videos.add(video)
+        # self.videos.add((title.get_attribute('title'), title.get_attribute('href')))
+
+    self.chrome.close()
     return self.videos
+
+# scout = Scout()
+# scout.findVideos()
