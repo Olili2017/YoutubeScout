@@ -51,9 +51,9 @@ class YouTubeVideo:
   #   print("passing with no namems")
     # return self.getDownloadUrl(url=url)
 
-  def __scoutDownloadUrl(self, url:str):
-    yt = YouTube(url)
-    return yt.streams.first().url
+  def __scoutDownloadUrl(self, url):
+    yt = YouTube(url).streams
+    return yt.first().url
 
   def __setUrl(self, url):
     self.__url = url
@@ -116,5 +116,5 @@ class ScrapedVideo:
     return self.__thumbnail
 
 
-v = YouTubeVideo("https://www.youtube.com/watch?v=AMcWwZumRkQ")
-print(v.getDownloadUrl())
+# v = YouTubeVideo('https://www.youtube.com/watch?v=P156VjNAqjY')
+# v.getDownloadUrl()
